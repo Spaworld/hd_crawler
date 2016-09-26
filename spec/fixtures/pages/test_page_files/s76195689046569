@@ -1,0 +1,117 @@
+if(s_c_il[1].AudienceManagement.passData)s_c_il[1].AudienceManagement.passData(
+{
+	"dcs_region" : 7,
+	"dests" : 
+	[
+		
+		{
+			"c" : "https://googleads.g.doubleclick.net/pagead/viewthroughconversion/1071174766/?value=1.00&currency_code=USD&label=TLX4CJ3jtVYQ7qjj_gM&guid=ON&script=0",
+			"id" : "1433918-1474823936",
+			"y" : "img"
+		},
+		
+		{
+			"c" : "https://googleads.g.doubleclick.net/pagead/viewthroughconversion/1071174766/?value=1.00&currency_code=USD&label=cHDMCL64tVYQ7qjj_gM&guid=ON&amp;script=0",
+			"id" : "1433921-1474823936",
+			"y" : "img"
+		},
+		
+		{
+			"c" : "https://googleads.g.doubleclick.net/pagead/viewthroughconversion/1071174766/?value=1.00&currency_code=USD&label=np5pCN_K2VoQ7qjj_gM&guid=ON&script=0",
+			"id" : "1433925-1474823936",
+			"y" : "img"
+		},
+		
+		{
+			"c" : "https://googleads.g.doubleclick.net/pagead/viewthroughconversion/1011987023/?value=1.00&currency_code=USD&label=bTQWCIHqsFYQz-TG4gM&guid=ON&script=0",
+			"id" : "1433924-1474823936",
+			"y" : "img"
+		},
+		
+		{
+			"c" : "https://googleads.g.doubleclick.net/pagead/viewthroughconversion/1071174766/?value=1.00&currency_code=USD&label=s0xyCOL2o1sQ7qjj_gM&guid=ON&script=0",
+			"id" : "1433929-1474823936",
+			"y" : "img"
+		},
+		
+		{
+			"c" : "https://googleads.g.doubleclick.net/pagead/viewthroughconversion/1071174766/?value=1.00&currency_code=USD&label=NhlICO7lq1sQ7qjj_gM&guid=ON&script=0",
+			"id" : "1433930-1474823936",
+			"y" : "img"
+		},
+		
+		{
+			"c" : "https://googleads.g.doubleclick.net/pagead/viewthroughconversion/1071174766/?value=1.00&currency_code=USD&label=v8MkCLvhtVYQ7qjj_gM&guid=ON&script=0",
+			"id" : "1433986-1474823936",
+			"y" : "img"
+		}
+	],
+	"dpcalls" : [],
+	"ibs" : 
+	[
+		
+		{
+			"fireURLSync" : 0,
+			"id" : "269",
+			"tag" : "img",
+			"ttl" : 10080,
+			"url" : 
+			[
+				"//sync.mathtag.com/sync/img?mt_exid=10004&mt_exuid=90088026905000840631168745942721574780&redir=https%3A%2F%2Fdpm.demdex.net%2Fibs%3Adpid%3D269%26dpuuid%3D[MM_UUID]%26ddsuuid%3d90088026905000840631168745942721574780"
+			]
+		},
+		
+		{
+			"fireURLSync" : 0,
+			"id" : "359",
+			"tag" : "img",
+			"ttl" : 30240,
+			"url" : 
+			[
+				"//i.w55c.net/ping_match.gif?st=dmx&rurl=https%3A%2F%2Fdpm.demdex.net%2Fibs%3Adpid%3D359%26dpuuid%3D_wfivefivec_"
+			]
+		},
+		
+		{
+			"fireURLSync" : 0,
+			"id" : "470",
+			"tag" : "img",
+			"ttl" : 30240,
+			"url" : 
+			[
+				"//d.turn.com/r/dd/id/L2NzaWQvMS9jaWQvMjM2NTYzMjkvdC8y/url/https%3A%2F%2Fdpm.demdex.net%2Fibs%3Adpid%3D470%26dpuuid%3D%24!%7BTURN_UUID%7D"
+			]
+		},
+		
+		{
+			"fireURLSync" : 0,
+			"id" : "771",
+			"tag" : "img",
+			"ttl" : 20160,
+			"url" : [ "https://cm.g.doubleclick.net/pixel?google_nid=adobe_dmp&google_cm" ]
+		},
+		
+		{
+			"fireURLSync" : 0,
+			"id" : "28645",
+			"tag" : "img",
+			"ttl" : 10080,
+			"url" : 
+			[
+				"//gum.criteo.com/sync?c=8&r=1&a=1&u=https%3A%2F%2Fdpm.demdex.net%2Fibs%3Adpid%3D28645%26dpuuid%3D%40USERID%40"
+			]
+		}
+	],
+	"stuff" : 
+	[
+		
+		{
+			"cn" : "at_homedepot",
+			"cv" : "segments=3887886,1131078,4161631,4161632",
+			"dmn" : "api-adobe.com",
+			"ttl" : 1
+		}
+	],
+	"uuid" : "90088026905000840631168745942721574780"
+}
+);

@@ -15,9 +15,16 @@ group :development, :test do
   gem 'byebug'
   gem 'factory_girl_rails'
   gem 'faker'
-  gem 'capybara'
   gem 'dotenv-rails'
 end
+
+gem 'capybara'
+# gem 'nokogiri'
+# gem 'selenium-webdriver'
+gem 'poltergeist'
+# gem 'hashie'
+# gem 'mechanize'
+gem 'pry-rails'
 
 group :development do
   gem 'web-console', '~> 2.0'

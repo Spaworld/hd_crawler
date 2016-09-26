@@ -1,0 +1,24 @@
+require 'poltergeist_crawler'
+require 'pry-rails'
+
+class Krawler < PoltergeistCrawler
+
+  def crawl
+    visit "http://www.homedepot.com/p/Universal-Tubs-26-in-x-46-in-x-44-in-3-Piece-Direct-to-Stud-Walk-In-BathTub-Surround-in-White-HD2747SEN/203753762?"
+    page.all('body script', visible: false).each do |el|
+      if el.text(:all).start_with?("define('server-data")
+        @server_data = el.text(:all)
+      end
+    end
+    # puts eval(@server_data)
+    @data = @server_data.scan(/\s{\"b*(.*?)\}}\]};/m)
+    data_hash = Hash[ @data.group_by(&:first).map{ |k,a| [k,a.map(&:last)] } ]
+    puts "----"
+    puts data_hash.keys
+    binding.pry
+
+    # puts @server_data.scan(/\s{\"b*(.*?)\}}\]};/m).map { |x| JSON.parse(x.flatten)}#$.gsub("\\","").split('",').map {|x| p x }
+
+  end
+
+end
