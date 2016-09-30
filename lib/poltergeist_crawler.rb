@@ -1,5 +1,6 @@
 require 'capybara/poltergeist'
 require 'capybara/dsl'
+require 'nokogiri'
 
 class PoltergeistCrawler
   include Capybara::DSL
@@ -24,6 +25,15 @@ class PoltergeistCrawler
 
   def screenshot(name="screenshot")
     page.driver.render("public/#{name}.jpg",full: true)
+  end
+
+  def doc
+    Nokogiri::HTML(page.body)
+  end
+
+  def reset_session
+    reset_session!
+    return
   end
 
 end

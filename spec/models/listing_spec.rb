@@ -1,5 +1,13 @@
 require 'rails_helper'
 
 RSpec.describe Listing, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+
+  context 'when parsing product_data hash' do
+
+    it 'should store hd_id' do
+
+    end
+
+  end
+
 end

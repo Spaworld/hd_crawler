@@ -1,4 +1,3 @@
-# encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -11,13 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160925171218) do
+ActiveRecord::Schema.define(version: 20160929200744) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "listings", force: :cascade do |t|
-    t.string   "hd_id"
+    t.integer  "hd_id"
     t.string   "sku"
     t.string   "category"
     t.text     "description"
@@ -29,6 +28,9 @@ ActiveRecord::Schema.define(version: 20160925171218) do
     t.string   "warranty_url"
     t.datetime "created_at",                     null: false
     t.datetime "updated_at",                     null: false
+    t.string   "title"
+    t.string   "source_url"
+    t.jsonb    "functional_vars"
   end
 
 end

@@ -21,3 +21,7 @@
 
 # SimpleCov
 coverage
+
+# psql dumps
+*.psql
+

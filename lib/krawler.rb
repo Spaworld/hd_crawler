@@ -1,6 +1,4 @@
 require 'poltergeist_crawler'
-require 'pry-rails'
-require 'csv'
 
 class Krawler < PoltergeistCrawler
 
@@ -12,27 +10,23 @@ class Krawler < PoltergeistCrawler
     end
 
     @ids.each_with_index do |id, index|
-      next if Listing.find_by(hd_id: id).nil?
+      next unless Listing.find_by(hd_id: id.to_i).nil?
+      puts ">>> creating listing #{id} | number #{index + 1}"
       search_for_product_id(id)
+      puts "Page content empty? #{page.nil?}"
       page.all('body script', visible: false).each do |el|
         if el.text(:all).start_with?("define('server-data")
-          @server_data = el.text(:all)
+          @server_data = el.text(:all).strip
         end
       end
-      product_data = eval(@server_data.match(/\s{\"b*(.*?)\}}\]};/m).to_s)
-      Listing.create(
-        hd_id:             product_data[:itemId],
-        sku:               product_data[:info][:modelNumber],
-        category:          product_data[:dimensions][0][:ancestors].last[:name],
-        description:       product_data[:info][:description],
-        bullets:           product_data[:attributeGroups][3][:entries].map {|x| x[:value] },
-        image_urls:       product_data[:media][:mediaList].select {|x| x[:height] == '1000' }.map {|s| s[:location]},
-        specifications:    product_data[:attributeGroups][4][:entries],
-        installation_url:  product_data[:attributeGroups][2][:entries][1][:url],
-        specification_url: product_data[:attributeGroups][2][:entries][2][:url],
-        warranty_url:      product_data[:attributeGroups][2][:entries][3][:url]
-      )
-      puts "---created listing number #{index}"
+      puts ">>> @server_data.nil?: #{@server_data.nil?}"
+      next if @server_data.nil?
+      product_data = eval(@server_data.match(/\s{\"b*(.*?)\}\]};/).to_s)
+      puts "-=-=-=-=-#{product_data}"
+      next if product_data.nil?
+      puts 'product_data not nil'
+      Listing.create_from_hash(product_data)
+      puts "!<<< created listing #{id} | number #{index + 1}"
     end
 
   end

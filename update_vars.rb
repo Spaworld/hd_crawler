@@ -5,17 +5,12 @@ require 'crawler'
 # Crawler.new.launch('lib/ids.csv')
 # Krawler.new.crawl
 ids = FileParser.get_ids('lib/ids.csv')
-crawler = Crawler.new
 
 ids.each_with_index do |id, index|
+  next unless Listing.find_by(hd_id: id).nil? || Listing.find_by(hd_id: id).functional_vars.nil?
   puts
-  puts "------ PID: #{index + 1} starting ------"
-  next if Listing.find_by(hd_id: id)
-  crawler.fetch_listing_attributes(id)
-  if (index + 1 ) % 100 == 0
-    puts '--- resetting sessions'
-    crawler.reset_session
-  end
+  puts "== uupdating listing hd_id #{id} =="
+  Crawler.new.fetch_listing_attributes(id)
   puts '**************************************'
 end
 
