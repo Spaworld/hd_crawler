@@ -2,12 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Listing, type: :model do
 
-  context 'when parsing product_data hash' do
-
-    it 'should store hd_id' do
-
-    end
-
-  end
+  it { should validate_presence_of(:hd_id) }
+  it { should validate_uniqueness_of(:hd_id) }
 
 end

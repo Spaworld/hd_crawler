@@ -1,11 +1,10 @@
 class Listing < ActiveRecord::Base
 
-  validates_presence_of :hd_id
-  validates_uniqueness_of :hd_id
+  validates :hd_id, presence: true, uniqueness: true
 
   def self.create_from_hash(product_data)
     return if product_data.nil? || Listing.find_by(hd_id: product_data[:itemId].to_i).present?
-    puts "--- storing listing number: #{product_data[:itemId]}"
+    Notifier.log('notify',"storing listing # #{product_data[:itemId]}")
     listing = new(
       hd_id:             product_data[:itemId].to_i,
       sku:               product_data[:info][:modelNumber],
@@ -41,8 +40,7 @@ class Listing < ActiveRecord::Base
       end
     end
     listing.save
-    puts 'OK!'
-    puts
+    Notifier.log('status','ok')
   end
 
   def formatted_image_urls
