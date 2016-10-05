@@ -5,7 +5,7 @@ class Listing < ActiveRecord::Base
   def self.create_from_hash(product_data)
     return if product_data.nil? ||
       Listing.find_by(hd_id: product_data.hd_id).present?
-    Notifier.log('notify',"storing listing # #{ product_data.hd_id }")
+    Notifier.log('notify', "storing listing # #{ product_data.hd_id }")
     listing = new(
       hd_id:             product_data.hd_id,
       sku:               product_data.sku,
@@ -23,7 +23,7 @@ class Listing < ActiveRecord::Base
       warranty_url:      product_data.warranty_url
     )
     listing.save
-    Notifier.log('status','ok')
+    Notifier.log('status', 'ok')
   end
 
   def formatted_image_urls
