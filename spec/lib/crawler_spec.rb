@@ -60,13 +60,6 @@ RSpec.describe Crawler do
       expect(Listing.last.image_urls).to_not be_empty
     end
 
-    it 'should correctly interpret specifications from raw data hash' do
-      expect(Listing.last.specifications).to_not be_empty
-    end
-
-    it 'should trim the the raw hash to contain core k/v pairs' do
-    end
-
   end
 
 end

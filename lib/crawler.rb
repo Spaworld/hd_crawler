@@ -25,16 +25,18 @@ class Crawler < PoltergeistCrawler
     Notifier.log('notify', "fetching data from #{ENV['TARGET_DOMAIN']}")
     return if doc.at('#pip-server-data').nil?
     raw_data = doc.at('#pip-server-data').text.strip.squish
-    @product_data = eval(
-      raw_data
-      .match(/\s{"b*(.*?)\}\]};/m)
-      .to_s
-    )
-    path = 'spec/dump.txt'
-    content = raw_data
-    File.open(path, "w+") do |f|
-      f.write(content)
-    end
+    @product_data = DataSerializer.new(raw_data)
+    # @product_data = DataSerializer.parse(raw_data)
+    # @product_data = eval(
+    #   raw_data
+    #   .match(/\s{"b*(.*?)\}\]};/m)
+    #   .to_s
+    # )
+    # snapshot_output
+    # path = 'spec/dump.txt'
+    # File.open(path, "w+") do |f|
+    #   f.write(raw_data)
+    # end
     Notifier.log('status', 'ok')
   end
 
@@ -48,6 +50,14 @@ class Crawler < PoltergeistCrawler
 
   def humanize_session
     sleep(rand(3.0...8.99))
+  end
+
+  def snapshot_output(source)
+    path = 'log/snapshots/dump.txt'
+    content = raw_data
+    File.open(path, "w+") do |f|
+      f.write(content)
+    end
   end
 
 end

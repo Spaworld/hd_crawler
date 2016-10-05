@@ -3,42 +3,62 @@ class Listing < ActiveRecord::Base
   validates :hd_id, presence: true, uniqueness: true
 
   def self.create_from_hash(product_data)
-    return if product_data.nil? || Listing.find_by(hd_id: product_data[:itemId].to_i).present?
-    Notifier.log('notify',"storing listing # #{product_data[:itemId]}")
+    return if product_data.nil? ||
+      Listing.find_by(hd_id: product_data.hd_id).present?
+    Notifier.log('notify',"storing listing # #{ product_data.hd_id }")
     listing = new(
-      hd_id:             product_data[:itemId].to_i,
-      sku:               product_data[:info][:modelNumber],
-      title:             product_data[:info][:productLabel],
-      source_url:        product_data[:webUrl],
-      category:          product_data[:itemExtension][:categoryName],
-      description:       product_data[:info][:description],
-      bullets:           product_data[:attributeGroups][3][:entries].map { |x| x[:value] },
-      image_urls:        product_data[:media][:mediaList].select { |image| image[:height] === '1000' }.map{ |node| node[:location] },
-      specifications:    product_data[:attributeGroups][4][:entries].map { |x| Hash[x[:name], x[:value]] }.reduce { |parent, h| parent.merge(h) },
-      functional_vars:   product_data[:itemExtension][:functionalDetailsAttributes].map { |x| Hash[x[:name], x[:value]] }.reduce { |parent, h| parent.merge(h) }
-
+      hd_id:             product_data.hd_id,
+      sku:               product_data.sku,
+      title:             product_data.title,
+      source_url:        product_data.source_url,
+      price:             product_data.price,
+      sale_price:        product_data.sale_price,
+      category:          product_data.category,
+      description:       product_data.description,
+      bullets:           product_data.bullets,
+      image_urls:        product_data.image_urls,
+      functional_vars:   product_data.functional_vars,
+      installation_url:  product_data.installation_url,
+      specification_url: product_data.specification_url,
+      warranty_url:      product_data.warranty_url
     )
-    unless product_data[:attributeGroups][2][:entries][1].nil?
-      begin
-        listing.installation_url  = product_data[:attributeGroups][2][:entries][1][:url]
-      rescue
-        binding.pry
-      end
-    end
-    unless product_data[:attributeGroups][2][:entries][2].nil?
-      begin
-        listing.specification_url = product_data[:attributeGroups][2][:entries][2][:url]
-      rescue
-        binding.pry
-      end
-    end
-    unless product_data[:attributeGroups][2][:entries][3].nil?
-      begin
-        listing.warranty_url =  product_data[:attributeGroups][2][:entries][3][:url]
-      rescue
-        binding
-      end
-    end
+
+    # listing = new(
+    #   hd_id:             product_data[:itemId].to_i,
+    #   sku:               product_data[:info][:modelNumber],
+    #   title:             product_data[:info][:productLabel],
+    #   source_url:        product_data[:webUrl],
+    #   price:             product_data.price,
+    #   sale_price:        product_data.sale_price,
+    #   category:          product_data[:itemExtension][:categoryName],
+    #   description:       product_data[:info][:description],
+    #   bullets:           product_data[:attributeGroups][3][:entries].map { |x| x[:value] },
+    #   image_urls:        product_data[:media][:mediaList].select { |image| image[:height] === '1000' }.map{ |node| node[:location] },
+    #   specifications:    product_data[:attributeGroups][4][:entries].map { |x| Hash[x[:name], x[:value]] }.reduce { |parent, h| parent.merge(h) },
+    #   functional_vars:   product_data[:itemExtension][:functionalDetailsAttributes].map { |x| Hash[x[:name], x[:value]] }.reduce { |parent, h| parent.merge(h) }
+
+    # )
+    # unless product_data[:attributeGroups][2][:entries][1].nil?
+    #   begin
+    #     listing.installation_url  = product_data[:attributeGroups][2][:entries][1][:url]
+    #   rescue
+    #     binding.pry
+    #   end
+    # end
+    # unless product_data[:attributeGroups][2][:entries][2].nil?
+    #   begin
+    #     listing.specification_url = product_data[:attributeGroups][2][:entries][2][:url]
+    #   rescue
+    #     binding.pry
+    #   end
+    # end
+    # unless product_data[:attributeGroups][2][:entries][3].nil?
+    #   begin
+    #     listing.warranty_url =  product_data[:attributeGroups][2][:entries][3][:url]
+    #   rescue
+    #     binding
+    #   end
+    # end
     listing.save
     Notifier.log('status','ok')
   end

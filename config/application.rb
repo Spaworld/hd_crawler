@@ -14,6 +14,7 @@ require 'pry-rails'
 
 require_relative '../lib/crawler'
 require_relative '../lib/notifier'
+require_relative '../lib/data_serializer'
 
 Bundler.require(*Rails.groups)
 
