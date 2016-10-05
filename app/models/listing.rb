@@ -22,57 +22,12 @@ class Listing < ActiveRecord::Base
       specification_url: product_data.specification_url,
       warranty_url:      product_data.warranty_url
     )
-
-    # listing = new(
-    #   hd_id:             product_data[:itemId].to_i,
-    #   sku:               product_data[:info][:modelNumber],
-    #   title:             product_data[:info][:productLabel],
-    #   source_url:        product_data[:webUrl],
-    #   price:             product_data.price,
-    #   sale_price:        product_data.sale_price,
-    #   category:          product_data[:itemExtension][:categoryName],
-    #   description:       product_data[:info][:description],
-    #   bullets:           product_data[:attributeGroups][3][:entries].map { |x| x[:value] },
-    #   image_urls:        product_data[:media][:mediaList].select { |image| image[:height] === '1000' }.map{ |node| node[:location] },
-    #   specifications:    product_data[:attributeGroups][4][:entries].map { |x| Hash[x[:name], x[:value]] }.reduce { |parent, h| parent.merge(h) },
-    #   functional_vars:   product_data[:itemExtension][:functionalDetailsAttributes].map { |x| Hash[x[:name], x[:value]] }.reduce { |parent, h| parent.merge(h) }
-
-    # )
-    # unless product_data[:attributeGroups][2][:entries][1].nil?
-    #   begin
-    #     listing.installation_url  = product_data[:attributeGroups][2][:entries][1][:url]
-    #   rescue
-    #     binding.pry
-    #   end
-    # end
-    # unless product_data[:attributeGroups][2][:entries][2].nil?
-    #   begin
-    #     listing.specification_url = product_data[:attributeGroups][2][:entries][2][:url]
-    #   rescue
-    #     binding.pry
-    #   end
-    # end
-    # unless product_data[:attributeGroups][2][:entries][3].nil?
-    #   begin
-    #     listing.warranty_url =  product_data[:attributeGroups][2][:entries][3][:url]
-    #   rescue
-    #     binding
-    #   end
-    # end
     listing.save
     Notifier.log('status','ok')
   end
 
   def formatted_image_urls
     image_urls.join(',')
-  end
-
-  def formatted_specs
-    if specifications.class == Array
-      specifications.map { |x| Hash[x['name'], x['value']] }.reduce {|acc, h| acc.merge(h) }
-    else
-      specifications
-    end
   end
 
   def formatted_bullets
@@ -125,7 +80,7 @@ class Listing < ActiveRecord::Base
   scope :by_hd_id, -> { uniq { |l| l.hd_id } }
 
   def self.to_csv
-    attributes = %w(id hd_id sku source_url title category collection color drain_side therapy description bullets formatted_image_urls installation_url specification_url warranty_url)
+    attributes = %w(id hd_id sku source_url price sale_price title category collection color drain_side therapy description bullets formatted_image_urls installation_url specification_url warranty_url)
     CSV.generate(headers: true) do |csv|
       csv << attributes
       all.each do |listing|
@@ -134,6 +89,8 @@ class Listing < ActiveRecord::Base
           listing.hd_id,
           listing.sku,
           listing.source_url,
+          listing.price,
+          listing.sale_price,
           listing.title,
           listing.category,
           listing.collection,
