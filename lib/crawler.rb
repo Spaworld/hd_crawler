@@ -26,17 +26,6 @@ class Crawler < PoltergeistCrawler
     return if doc.at('#pip-server-data').nil?
     raw_data = doc.at('#pip-server-data').text.strip.squish
     @product_data = DataSerializer.new(raw_data)
-    # @product_data = DataSerializer.parse(raw_data)
-    # @product_data = eval(
-    #   raw_data
-    #   .match(/\s{"b*(.*?)\}\]};/m)
-    #   .to_s
-    # )
-    # snapshot_output
-    # path = 'spec/dump.txt'
-    # File.open(path, "w+") do |f|
-    #   f.write(raw_data)
-    # end
     Notifier.log('status', 'ok')
   end
 
