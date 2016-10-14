@@ -1,9 +1,6 @@
-require 'krawler'
 require 'listing'
 require 'crawler'
 
-# Crawler.new.launch('lib/ids.csv')
-# Krawler.new.crawl
 ids = FileParser.get_ids('lib/ids.csv')
 crawler = Crawler.new
 
