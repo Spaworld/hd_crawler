@@ -14,7 +14,8 @@ class Crawler < PoltergeistCrawler
   def fetch_listing_page(id)
     Notifier.log('notify', "querying #{ENV['TARGET_DOMAIN']}")
     visit ENV['TARGET_DOMAIN']
-    fill_in('What can we help you find?', with: id)
+    search_bar = find('#headerSearch')
+    fill_in(search_bar[:name], with: id)
     find('#headerSearch').native.send_keys(:return)
     humanize_session
     return if doc.at('#pip-server-data').nil?

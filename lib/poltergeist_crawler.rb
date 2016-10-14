@@ -20,7 +20,7 @@ class PoltergeistCrawler
       "DNT" => 1,
       "User-Agent" => "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:22.0) Gecko/20100101 Firefox/22.0"
     }
-    Capybara.ignore_hidden_elements = true
+    Capybara.ignore_hidden_elements = false
   end
 
   def screenshot(name="screenshot")
