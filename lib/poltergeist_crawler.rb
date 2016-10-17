@@ -32,7 +32,7 @@ class PoltergeistCrawler
   end
 
   def reset_session
-    reset_session!
+    page.driver.reset!
     return
   end
 
