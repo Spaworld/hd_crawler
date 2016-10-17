@@ -107,4 +107,9 @@ class Listing < ActiveRecord::Base
       end
     end
   end
+
+  def self.source_urls
+    all.as_json(only: [:hd_id, :source_url])
+  end
+
 end
