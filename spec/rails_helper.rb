@@ -7,6 +7,7 @@ require 'support/shoulda_matchers'
 
 require 'capybara/rspec'
 require 'capybara/rails'
+Rails.application.load_tasks
 
 ActiveRecord::Migration.maintain_test_schema!
 

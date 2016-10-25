@@ -35,5 +35,6 @@ group :test do
   gem 'shoulda-matchers', '~> 3.1'
   gem 'whiny_validation'
   gem 'simplecov', require: false
+  gem 'fantaskspec'
 end
 
