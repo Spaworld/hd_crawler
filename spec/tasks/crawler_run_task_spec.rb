@@ -2,25 +2,24 @@ require 'rails_helper'
 
 RSpec.describe 'crawler:run', type: :rake do
 
-  let(:ids)   { %w(1,2,3) }
-  let(:id)    { ids.sample }
-
   it 'should handle empty ids array' do
     subject_with_empty_args = subject
     expect { subject_with_empty_args.execute }
       .to_not raise_error
   end
 
-  it 'triggers Crawler#fetch_listing_attributes' do
-    crawler = Crawler.new
-    # allow_any_instance_of(Crawler)
-    allow(crawler)
+  it 'should trigger the crawling process for id args' do
+    crawler = double(
+      'crawler', fetch_listing_attributes: true)
+    allow(Crawler)
+      .to receive(:new)
+      .and_return(crawler)
+    expect(crawler)
       .to receive(:fetch_listing_attributes)
-      .with(1)
-      .and_return('foo')
-    # crawler = Crawler.new
-    expect(crawler).to receive(:fetch_listing_attributes)
-    subject.execute([1])
+      .with(instance_of(Fixnum))
+      .at_least(3).times
+    subject.execute([1,2,3])
   end
 
 end
+
