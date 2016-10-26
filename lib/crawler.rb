@@ -4,7 +4,6 @@ require_relative 'poltergeist_crawler'
 class Crawler < PoltergeistCrawler
 
   def fetch_listing_attributes(id)
-    puts '---a'
     Notifier.log('init', 'crawling', id)
     fetch_listing_page(id)
     fetch_listing_data
