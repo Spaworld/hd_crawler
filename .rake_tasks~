@@ -7,6 +7,7 @@ assets:environment
 assets:precompile
 cache_digests:dependencies
 cache_digests:nested_dependencies
+crawler:run[ids]
 db:create
 db:drop
 db:environment:set
@@ -36,6 +37,7 @@ spec
 spec:controllers
 spec:lib
 spec:models
+spec:tasks
 stats
 time:zones[country_or_offset]
 tmp:clear
