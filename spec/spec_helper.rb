@@ -3,6 +3,7 @@ SimpleCov.start
 
 require 'factory_girl_rails'
 require 'support/database_cleaner'
+require 'support/rspec_matchers'
 require 'fantaskspec'
 
 RSpec.configure do |config|

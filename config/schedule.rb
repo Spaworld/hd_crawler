@@ -19,6 +19,6 @@
 
 # Learn more: http://github.com/javan/whenever
 #
-every 7.days do
+every 7.days, at: '3:00am' do
   rake 'crawler:run'
 end
