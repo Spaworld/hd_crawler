@@ -8,9 +8,8 @@ RSpec.describe Whenever do
   end
 
   it 'should schedule the crawling process to run every 7 days' do
-    puts whenever.inspect
     expect(whenever).to schedule_rake('crawler:run')
-      .every(7.days)
+      .every(:sunday)
       .at('3:00am')
   end
 
