@@ -15,6 +15,10 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'sidekiq'
 gem 'whenever', require: false
 
+gem 'capybara'
+gem 'poltergeist'
+gem 'pry-rails'
+
 group :development, :test do
   gem 'rspec-rails', '~> 3.5'
   gem 'byebug'
@@ -23,14 +27,11 @@ group :development, :test do
   gem 'dotenv-rails'
 end
 
-gem 'capybara'
-gem 'poltergeist'
-gem 'pry-rails'
-
 group :development do
   gem 'web-console', '~> 2.0'
   gem 'spring'
   gem 'hirb'
+  gem 'libnotify'
 end
 
 group :test do
@@ -39,5 +40,9 @@ group :test do
   gem 'whiny_validation'
   gem 'simplecov', require: false
   gem 'fantaskspec'
+end
+
+group :development, :test do
+  gem 'guard-rspec'
 end
 

@@ -25,3 +25,6 @@ coverage
 # psql dumps
 *.psql
 
+# AWS cred
+*.pem
+
