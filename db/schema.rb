@@ -10,10 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161102213946) do
+ActiveRecord::Schema.define(version: 20161103153950) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+  enable_extension "hstore"
 
   create_table "listings", force: :cascade do |t|
     t.integer  "hd_id"
@@ -48,10 +49,10 @@ ActiveRecord::Schema.define(version: 20161102213946) do
     t.string   "name"
     t.text     "description"
     t.string   "style"
-    t.json     "instructions"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
     t.text     "entry_point"
+    t.hstore   "instructions"
   end
 
 end
